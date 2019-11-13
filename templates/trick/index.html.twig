@@ -3,24 +3,24 @@
 {% block title %}Trick index{% endblock %}
 
 {% block body %}
-    <h1>Trick index</h1>
+    <h1>Liste des Tricks</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>actions</th>
+    <table class="table" style="width="80%"; border: 1px blue solid">
+        <thead style="text-align: left">
+            <tr style="border: 1px blue solid">
+                <th style="border: 1px solid; width:5%">Id</th>
+                <th style="border: 1px solid; width:15%">Nom</th>
+                <th style="border: 1px solid">Description</th>
+                <th style="border: 1px solid; text-align: center; width:10%">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for trick in tricks %}
             <tr>
-                <td>{{ trick.id }}</td>
-                <td>{{ trick.title }}</td>
-                <td>{{ trick.description }}</td>
-                <td>
+                <td style="border: 1px solid #444">{{ trick.id }}</td>
+                <td style="border: 1px solid #444">{{ trick.title }}</td>
+                <td style="border: 1px solid #444">{{ trick.description }}</td>
+                <td style="border: 1px solid #444; text-align: center">
                     <a href="{{ path('trick_show', {'id': trick.id}) }}">show</a>
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
                 </td>
@@ -32,6 +32,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
 
-    <a href="{{ path('trick_new') }}">Create new</a>
+    <a href="{{ path('trick_new') }}">Créer un nouveau Trick</a>
 {% endblock %}
