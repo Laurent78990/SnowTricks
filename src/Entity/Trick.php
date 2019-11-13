@@ -32,14 +32,9 @@ class Trick
     private $group_id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $crea_date;
-
-    /**
-     * @ORM\Column(type="time")
-     */
-    private $crea_time;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -100,18 +95,6 @@ class Trick
     public function setCreaDate(\DateTimeInterface $crea_date): self
     {
         $this->crea_date = $crea_date;
-
-        return $this;
-    }
-
-    public function getCreaTime(): ?\DateTimeInterface
-    {
-        return $this->crea_time;
-    }
-
-    public function setCreaTime(\DateTimeInterface $crea_time): self
-    {
-        $this->crea_time = $crea_time;
 
         return $this;
     }
