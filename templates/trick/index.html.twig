@@ -5,22 +5,22 @@
 {% block body %}
     <h1>Liste des Tricks</h1>
 
-    <table class="table" style="width="80%"; border: 1px blue solid">
-        <thead style="text-align: left">
-            <tr style="border: 1px blue solid">
-                <th style="border: 1px solid; width:5%">Id</th>
-                <th style="border: 1px solid; width:15%">Nom</th>
-                <th style="border: 1px solid">Description</th>
-                <th style="border: 1px solid; text-align: center; width:10%">Actions</th>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for trick in tricks %}
             <tr>
-                <td style="border: 1px solid #444">{{ trick.id }}</td>
-                <td style="border: 1px solid #444">{{ trick.title }}</td>
-                <td style="border: 1px solid #444">{{ trick.description }}</td>
-                <td style="border: 1px solid #444; text-align: center">
+                <td>{{ trick.id }}</td>
+                <td>{{ trick.title }}</td>
+                <td>{{ trick.description }}</td>
+                <td>
                     <a href="{{ path('trick_show', {'id': trick.id}) }}">show</a>
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
                 </td>

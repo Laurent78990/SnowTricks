@@ -37,15 +37,11 @@ class Trick
     private $crea_date;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=100)
      */
     private $crea_author;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $is_active;
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -111,15 +107,4 @@ class Trick
         return $this;
     }
 
-    public function getIsActive(): ?bool
-    {
-        return $this->is_active;
-    }
-
-    public function setIsActive(bool $is_active): self
-    {
-        $this->is_active = $is_active;
-
-        return $this;
-    }
 }
