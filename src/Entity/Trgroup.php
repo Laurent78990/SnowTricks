@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TrgroupRepository")
  */
-class Group
+class Trgroup
 {
     /**
      * @ORM\Id()
@@ -17,12 +17,12 @@ class Group
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=30)
      */
     private $gr_name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $gr_desc;
 
@@ -53,7 +53,7 @@ class Group
         return $this->gr_desc;
     }
 
-    public function setGrDesc(string $gr_desc): self
+    public function setGrDesc(?string $gr_desc): self
     {
         $this->gr_desc = $gr_desc;
 

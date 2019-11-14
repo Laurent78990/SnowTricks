@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Trgroup{% endblock %}
+
+{% block body %}
+    <h1>Edit Trgroup</h1>
+
+    {{ include('trgroup/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('trgroup_index') }}">back to list</a>
+
+    {{ include('trgroup/_delete_form.html.twig') }}
+{% endblock %}

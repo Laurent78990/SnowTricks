@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Group index{% endblock %}
+{% block title %}Trgroup index{% endblock %}
 
 {% block body %}
-    <h1>Group index</h1>
+    <h1>Trgroup index</h1>
 
     <table class="table">
         <thead>
@@ -16,15 +16,15 @@
             </tr>
         </thead>
         <tbody>
-        {% for group in groups %}
+        {% for trgroup in trgroups %}
             <tr>
-                <td>{{ group.id }}</td>
-                <td>{{ group.grName }}</td>
-                <td>{{ group.grDesc }}</td>
-                <td>{{ group.grCreaDate ? group.grCreaDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ trgroup.id }}</td>
+                <td>{{ trgroup.grName }}</td>
+                <td>{{ trgroup.grDesc }}</td>
+                <td>{{ trgroup.grCreaDate ? trgroup.grCreaDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('group_show', {'id': group.id}) }}">show</a>
-                    <a href="{{ path('group_edit', {'id': group.id}) }}">edit</a>
+                    <a href="{{ path('trgroup_show', {'id': trgroup.id}) }}">show</a>
+                    <a href="{{ path('trgroup_edit', {'id': trgroup.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('group_new') }}">Create new</a>
+    <a href="{{ path('trgroup_new') }}">Create new</a>
 {% endblock %}
