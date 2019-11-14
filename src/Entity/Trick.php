@@ -32,7 +32,7 @@ class Trick
     private $group_id;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $crea_date;
 
