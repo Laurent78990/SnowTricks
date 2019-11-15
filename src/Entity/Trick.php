@@ -27,7 +27,7 @@ class Trick
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"default":1} )
      */
     private $group_id;
 
@@ -35,13 +35,18 @@ class Trick
      * @ORM\Column(type="datetime")
      */
     private $crea_date;
+    // Setup automatic datetime
+    public function __construct()
+    {
+        $this->crea_date = new \Datetime();
+    }
 
     /**
      * @ORM\Column(type="string", length=100)
      */
     private $crea_author;
-
     
+    // ===================================================
     public function getId(): ?int
     {
         return $this->id;

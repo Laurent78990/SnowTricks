@@ -14,6 +14,8 @@ class TrickType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
+            ->add('group_id')
+            ->add('crea_author')
         ;
     }
 
