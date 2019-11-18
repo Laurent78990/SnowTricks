@@ -1,4 +1,12 @@
 
 body {
-	background-color: lightgreen;
+	background-color: bisque;
+}
+
+td img {
+	width: 40px;
+}
+
+th.txt-center {
+	text-align: center !important;
 }

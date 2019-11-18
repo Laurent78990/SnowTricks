@@ -4,24 +4,31 @@
 
 {% block body %}
     <h1>Liste des Tricks</h1>
+    <p>{{ "now"|date("D d-M-y - H:m:s") }} </p>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Actions</th>
+                <th>Groupe</th>
+                <th>Thumbnail</th>
+                <th class"txt-center">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for trick in tricks %}
             <tr>
-                <td>{{ trick.id }}</td>
                 <td>{{ trick.title }}</td>
                 <td>{{ trick.description }}</td>
+                <td>{{ trick.groupId }}</td>
+
+                {# <td><img src="https://via.placeholder.com/40/ddcc33" alt="Thumbnail"/></td> #}
+                <td><img src="../img/grab-mute-small.jpg" alt="Thumbnail"/></td>
+
                 <td>
                     <a href="{{ path('trick_show', {'id': trick.id}) }}">show</a>
+                    ||
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
                 </td>
             </tr>

@@ -20,8 +20,18 @@ class TrickController extends AbstractController
      */
     public function index(TrickRepository $trickRepository): Response
     {
+
+    // dump($trickRepository->findAll()); die;
+
+    $trix = $trickRepository->findAll();
+
+    dump($trix);
+    dump($trix[1]);
+    // die;
+
         return $this->render('trick/index.html.twig', [
-            'tricks' => $trickRepository->findAll(),
+            // 'tricks' => $trickRepository->findAll(),
+            'tricks' => $trix,
         ]);
     }
 
