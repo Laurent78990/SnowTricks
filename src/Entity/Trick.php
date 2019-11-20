@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  */
 class Trick
-{
+{   
+    use TimestampableEntity;
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -19,97 +22,90 @@ class Trick
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $title;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="integer", options={"default":1} )
-     */
-    private $group_id;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $crea_date;
-    // Setup automatic datetime
-    public function __construct()
-    {
-        $this->crea_date = new \Datetime();
-    }
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $crea_author;
-    
-    // ===================================================
+    private $image1;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $comment;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): self
+    public function setName(string $name): self
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getImage1(): ?string
     {
-        return $this->description;
+        return $this->image1;
     }
 
-    public function setDescription(string $description): self
+    public function setImage1(string $image1): self
     {
-        $this->description = $description;
+        $this->image1 = $image1;
 
         return $this;
     }
 
-    public function getGroupId(): ?int
+    public function getComment(): ?string
     {
-        return $this->group_id;
+        return $this->comment;
     }
 
-    public function setGroupId(int $group_id): self
+    public function setComment(string $comment): self
     {
-        $this->group_id = $group_id;
+        $this->comment = $comment;
 
         return $this;
     }
 
-    public function getCreaDate(): ?\DateTimeInterface
+    public function getCategory(): ?int
     {
-        return $this->crea_date;
+        return $this->category;
     }
 
-    public function setCreaDate(\DateTimeInterface $crea_date): self
+    public function setCategory(int $category): self
     {
-        $this->crea_date = $crea_date;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getCreaAuthor(): ?string
+    public function getAuthor(): ?int
     {
-        return $this->crea_author;
+        return $this->author;
     }
 
-    public function setCreaAuthor(string $crea_author): self
+    public function setAuthor(int $author): self
     {
-        $this->crea_author = $crea_author;
+        $this->author = $author;
 
         return $this;
     }
-
 }

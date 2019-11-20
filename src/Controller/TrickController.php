@@ -20,18 +20,8 @@ class TrickController extends AbstractController
      */
     public function index(TrickRepository $trickRepository): Response
     {
-
-    // dump($trickRepository->findAll()); die;
-
-    $trix = $trickRepository->findAll();
-
-    dump($trix);
-    dump($trix[1]);
-    // die;
-
         return $this->render('trick/index.html.twig', [
-            // 'tricks' => $trickRepository->findAll(),
-            'tricks' => $trix,
+            'tricks' => $trickRepository->findAll(),
         ]);
     }
 
@@ -63,8 +53,6 @@ class TrickController extends AbstractController
      */
     public function show(Trick $trick): Response
     {
-        // dump($trick); die;
-
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
         ]);
@@ -79,9 +67,6 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // No need to persist an existing object !
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('trick_index');

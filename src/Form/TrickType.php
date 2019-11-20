@@ -12,10 +12,11 @@ class TrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('group_id')
-            ->add('crea_author')
+            ->add('name')
+            ->add('image1')
+            ->add('comment')
+            ->add('category')
+            ->add('author')
         ;
     }
 
