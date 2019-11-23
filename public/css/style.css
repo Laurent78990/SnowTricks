@@ -10,3 +10,17 @@ td img {
 th.txt-center {
 	text-align: center !important;
 }
+
+#snow-logo {
+	width: 150px;
+	border-radius: 3px;
+}
+
+#navbar {
+	list-style-type: none;
+}
+
+
+#navbar li {
+	display: inline-block;
+}

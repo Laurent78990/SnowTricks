@@ -1,0 +1,18 @@
+<h1>Hello {{ user_first_name }}!</h1>
+
+<p>There are {{ notifications|length }} fruit in your list.</p>
+
+<ol>
+    <li>{{ notifications[0] }}</li>
+    <li>{{ notifications[1] }}</li>
+    <li>{{ notifications[2] }}</li>
+</ol>
+
+<hr>
+{% for item in notifications %}
+    
+    <ul>
+        <li>{{ item | upper }}</li>
+    </ul>
+
+{% endfor %}

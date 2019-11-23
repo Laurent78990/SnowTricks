@@ -1,0 +1,11 @@
+
+<img id="snow-logo" src="../images/{{ logoname }}" alt="Logo SnowTricks" />
+
+{# <h1>Hello {{ first_name }}!</h1> #}
+{# <p>There are {{ navbar|length }} items in the menu.</p> #}
+
+<ul id="navbar">
+	{% for item in navbar %}
+    	<li>{{ item | upper }}</li>
+	{% endfor %}
+</ul>

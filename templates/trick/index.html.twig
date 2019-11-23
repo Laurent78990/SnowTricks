@@ -3,6 +3,7 @@
 {% block title %}Trick index{% endblock %}
 
 {% block body %}
+
     <h1>Trick index</h1>
 
     <table class="table">
@@ -14,6 +15,8 @@
                 <th>Comment</th>
                 <th>Category</th>
                 <th>Author</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,6 +29,8 @@
                 <td>{{ trick.comment }}</td>
                 <td>{{ trick.category }}</td>
                 <td>{{ trick.author }}</td>
+                <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('trick_show', {'id': trick.id}) }}">show</a>
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
@@ -33,7 +38,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="9">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

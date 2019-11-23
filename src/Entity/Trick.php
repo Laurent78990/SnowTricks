@@ -35,7 +35,7 @@ class Trick
     private $comment;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
     private $category;
 
@@ -85,12 +85,12 @@ class Trick
         return $this;
     }
 
-    public function getCategory(): ?int
+    public function getCategory(): ?string
     {
         return $this->category;
     }
 
-    public function setCategory(int $category): self
+    public function setCategory(string $category): self
     {
         $this->category = $category;
 

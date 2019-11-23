@@ -1,10 +1,16 @@
 <?php
+// This from is used when creating a new Trick
 
 namespace App\Form;
 
 use App\Entity\Trick;
+
+use App\Entity\Category; // adding the target Entity
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TrickType extends AbstractType
@@ -15,8 +21,16 @@ class TrickType extends AbstractType
             ->add('name')
             ->add('image1')
             ->add('comment')
-            ->add('category')
+
+            // ->add('category')
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+            ])
+
             ->add('author')
+            // ->add('createdAt')
+            // ->add('updatedAt')
         ;
     }
 

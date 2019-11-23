@@ -19,7 +19,16 @@
 
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        
+          {{ include('templates\header\header.html.twig', {
+       'logoname': 'logo.png',
+       'navbar' : ['Accueil', 'Tricks', 'Sign-in', 'Sign-up']
+       } 
+       )}}
+
+        
+        {% endblock %}
 
         {% block javascripts %}
         
