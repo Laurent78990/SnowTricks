@@ -5,7 +5,12 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use App\Service\FileUploader;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,19 +27,34 @@ class TrickController extends AbstractController
     {
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
+            'page_title' => 'List of Tricks',
         ]);
     }
 
     /**
      * @Route("/new", name="trick_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,  FileUploader $fileUploader): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            // ... Begin the cover file upload
+            
+             /** @var UploadedFile $coverFile */
+             $coverFile = $form['cover']->getData();
+
+             // this condition is needed because the 'cover' field is not required
+             // so the JPG file must be processed only when a file is uploaded
+             if ($coverFile) {
+                $coverFileName = $fileUploader->upload($coverFile);
+                $trick->setcover($coverFileName);
+             }
+
+            // ... End cover file upload
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -45,6 +65,7 @@ class TrickController extends AbstractController
         return $this->render('trick/new.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
+            'page_title' => 'Create new Trick',
         ]);
     }
 
@@ -55,6 +76,7 @@ class TrickController extends AbstractController
     {
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            'page_title' => 'About this Trick',
         ]);
     }
 
@@ -67,9 +89,6 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // No need to persist an existing object !
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('trick_index');
@@ -78,6 +97,7 @@ class TrickController extends AbstractController
         return $this->render('trick/edit.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
+            'page_title' => 'Edit this Trick',
         ]);
     }
 

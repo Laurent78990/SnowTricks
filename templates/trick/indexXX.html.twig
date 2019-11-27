@@ -1,0 +1,52 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{page_title}}
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{page_title}}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Name</th>
+                <th>Thumbnail</th>
+                <th>Comment</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for trick in tricks %}
+                <tr>
+                    {# <td>{{ trick.id }}</td> #}
+                    <td class="font-weight-bold">{{ trick.name }}</td>
+                    <td><img src="../images/{{ trick.cover }}" alt="{{ trick.cover }}" /></td>
+                    <td>{{ trick.comment }}</td>
+                    <td>{{ trick.category.name }}</td>
+                    <td>{{ trick.author }}</td>
+                    <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i') : '' }}</td>
+                    <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i') : '' }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-success" href="{{ path('trick_show', {'id': trick.id}) }}">show</a>
+                        <a class="btn btn-sm btn-outline-warning" href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-sm btn-info" href="{{ path('trick_new') }}">Create new</a>
+{% endblock %}
