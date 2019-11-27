@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Trick{% endblock %}
+{% block title %}
+    {{page_title}}
+{% endblock %}
 
 {% block body %}
-    <h1>Trick</h1>
+
+    <h1>{{page_title}}</h1>
 
     <table class="table">
         <tbody>
@@ -16,8 +19,8 @@
                 <td>{{ trick.name }}</td>
             </tr>
             <tr>
-                <th>Image1</th>
-                <td>{{ trick.image1 }}</td>
+                <th>Cover</th>
+                <td>{{ trick.cover }}</td>
             </tr>
             <tr>
                 <th>Comment</th>
@@ -25,7 +28,7 @@
             </tr>
             <tr>
                 <th>Category</th>
-                <td>{{ trick.category }}</td>
+                <td>{{ trick.category.name }}</td>
             </tr>
             <tr>
                 <th>Author</th>
@@ -42,9 +45,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('trick_index') }}">back to list</a>
+    <a class="btn btn-sm btn-info" href="{{ path('trick_index') }}">back to list</a>
 
-    <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
+    <a class="btn btn-sm btn-outline-warning" href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
 
     {{ include('trick/_delete_form.html.twig') }}
 {% endblock %}

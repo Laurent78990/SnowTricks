@@ -25,9 +25,9 @@ class Trick
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string")
      */
-    private $image1;
+    private $cover;
 
     /**
      * @ORM\Column(type="text")
@@ -35,14 +35,15 @@ class Trick
     private $comment;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $category;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -61,14 +62,14 @@ class Trick
         return $this;
     }
 
-    public function getImage1(): ?string
+    public function getCover(): ?string
     {
-        return $this->image1;
+        return $this->cover;
     }
 
-    public function setImage1(string $image1): self
+    public function setCover(string $cover): self
     {
-        $this->image1 = $image1;
+        $this->cover = $cover;
 
         return $this;
     }
@@ -85,18 +86,6 @@ class Trick
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getAuthor(): ?int
     {
         return $this->author;
@@ -105,6 +94,18 @@ class Trick
     public function setAuthor(int $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

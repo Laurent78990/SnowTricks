@@ -1,48 +1,74 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Trick index{% endblock %}
+{% block title %}
+{{page_title}}
+{% endblock %}
 
 {% block body %}
 
-    <h1>Trick index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Image1</th>
-                <th>Comment</th>
-                <th>Category</th>
-                <th>Author</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+  <!--Banner-->
+  <div class="banner container-fluid">
+    <div class="view intro-2">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center"> 
+                <div class="container text-center white-text">
+                    <div class="white-text text-center wow fadeInUp">
+                        <h2>Bienvenue sur les pistes !</h2>
+                        <h5>Découvrez ou revoyez les plus belles figures de Snowboard.</h5>
+                        <br>
+                        <p>Après votre inscription, vous pourrez poster de nouveaux 'Tricks' et échanger avec toute la communauté.</p>
+                    </div>
+                </div>
+                <a href="{{ path('trick_index') }}#trickGallery"><i class="fas fa-arrow-circle-down"></i></a>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!--Banner-->
+  
+  <!--Gallery-->
+  <div class="gallery container">
+    <h1 id="trickGallery" class="text-center">{{page_title}}</h1>
+    
+    <div class="flex-container">
+        
         {% for trick in tricks %}
-            <tr>
-                <td>{{ trick.id }}</td>
-                <td>{{ trick.name }}</td>
-                <td>{{ trick.image1 }}</td>
-                <td>{{ trick.comment }}</td>
-                <td>{{ trick.category }}</td>
-                <td>{{ trick.author }}</td>
-                <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('trick_show', {'id': trick.id}) }}">show</a>
-                    <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        
+            <div class="card">
+                <a title="Show" href="{{ path('trick_show', {'id': trick.id}) }}">
+                    <img class="card-img-top" src="../images/{{ trick.cover }}" alt="{{ trick.cover }}" />
+                </a>
+            
+                <div class="card-body">
+                    <h4 class="card-title">{{ trick.name }}</h4>
 
-    <a href="{{ path('trick_new') }}">Create new</a>
-{% endblock %}
+                    <span class="card-icons">
+                    <a title="Edit" href="{{ path('trick_edit', {'id': trick.id}) }}">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    
+                    <form method="post" action="{{ path('trick_delete', {'id': trick.id}) }}"
+                        onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
+                        
+                        <button title="Delete" class="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                    </span>
+
+                </div>
+            </div>
+
+        {% else %}
+            <h3>no records found</h3>
+        {% endfor %}
+
+    </div>
+
+    <a class="btn btn-lg btn-green mt-3 text-center" href="{{ path('trick_new') }}">Create new</a>
+</div>
+<!--Gallery-->
+
+{% endblock %} {# End block body #}

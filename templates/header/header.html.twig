@@ -1,11 +1,40 @@
+  <!--Main Navigation-->
+  <header>
 
-<img id="snow-logo" src="../images/{{ logoname }}" alt="Logo SnowTricks" />
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigoXXX">
+      
+      <a class="navbar-brand" href="{{ path('home') }}"><img id="snow-logo" src="{{ logoname }}" alt="Logo SnowTricks" /></a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-{# <h1>Hello {{ first_name }}!</h1> #}
-{# <p>There are {{ navbar|length }} items in the menu.</p> #}
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ path('home') }}">Accueil<span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('trick_index') }}">Tricks</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('category_index') }}">Categories</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="../connexion">Sign in</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="../register">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<ul id="navbar">
-	{% for item in navbar %}
-    	<li>{{ item | upper }}</li>
-	{% endfor %}
-</ul>
+</header>
+<!--Main Navigation-->
