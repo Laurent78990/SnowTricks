@@ -39,7 +39,7 @@ class TrickType extends AbstractType
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/png',
-                            'image/vnd.sealedmedia.softseal.jpg',
+                            'image/jpeg',
                         ],
                         'mimeTypesMessage' => 'Please upload a .png or .jpg image.',
                     ])
@@ -49,15 +49,12 @@ class TrickType extends AbstractType
             
             ->add('comment')
 
-            // ->add('category')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
             ])
 
             ->add('author')
-            // ->add('createdAt')
-            // ->add('updatedAt')
         ;
     }
 

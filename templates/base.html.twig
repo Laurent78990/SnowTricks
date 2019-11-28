@@ -19,10 +19,11 @@
 
 <body>
 
+{# ================================================================================================================ #}
   <!--Navigation-->
   <header>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigoXXX">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
       
       <a class="navbar-brand" href="{{ path('trick_index') }}"><img id="snow-logo" src="../images/logo.png" alt="Logo SnowTricks" /></a>
       
@@ -56,38 +57,20 @@
 </header>
 <!--Navigation-->
 
-
-<!--Banner -->
-{# <section class="banner container-fluid padd-0">
-
-  {% block banner %}{% endblock %}
-
-</section> #}
-
-
+{# ================================================================================================================ #}
 <!--Main Container-->
 <main class="padd-0">
-
   {% block body %}{% endblock %}
-
 </main>
 
-
-
+{# ================================================================================================================ #}
 {% block footer %}
-
-  <footer><p class="indigo">2019 &copy; Laurent</p></footer>
-
+  <footer><p>2019 &copy; Laurent</p></footer>
 {% endblock %}
 
-
-
-
-
-
-
+{# ================================================================================================================ #}
 {% block javascripts %}
-<!-- JQuery -->
+<!-- JQuery First !-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
@@ -95,6 +78,10 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
+
+<!-- Personal JavaScript -->
+<script type="text/javascript" src="../js/app.js"></script>
+
 {% endblock %}
 
 </body>

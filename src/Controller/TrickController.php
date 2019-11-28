@@ -34,7 +34,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/new", name="trick_new", methods={"GET","POST"})
      */
-    public function new(Request $request,  FileUploader $fileUploader): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
@@ -43,7 +43,6 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             // ... Begin the cover file upload
-            
              /** @var UploadedFile $coverFile */
              $coverFile = $form['cover']->getData();
 
@@ -53,8 +52,8 @@ class TrickController extends AbstractController
                 $coverFileName = $fileUploader->upload($coverFile);
                 $trick->setcover($coverFileName);
              }
-
             // ... End cover file upload
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -83,12 +82,25 @@ class TrickController extends AbstractController
     /**
      * @Route("/{id}/edit", name="trick_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Trick $trick): Response
+    public function edit(Request $request, Trick $trick, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // ... Begin the cover file upload
+             /** @var UploadedFile $coverFile */
+             $coverFile = $form['cover']->getData();
+
+             // this condition is needed because the 'cover' field is not required
+             // so the JPG file must be processed only when a file is uploaded
+             if ($coverFile) {
+                $coverFileName = $fileUploader->upload($coverFile);
+                $trick->setcover($coverFileName);
+             }
+            // ... End cover file upload
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('trick_index');

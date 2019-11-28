@@ -22,6 +22,25 @@ background-color: rgba(43, 119, 122, 0.4);
 padding: 10px;
 }
 
+nav.navbar {
+  background: transparent !important;
+}
+
+nav.navbar.active {
+  font-weight: 400 !important;
+}
+nav.navbar-black04 {
+  background-color: rgba(25,79,139, 0.4) !important;
+}
+nav.navbar-black07 {
+  background-color: rgba(25,79,139, 0.7) !important;
+}
+nav.navbar-black10 {
+  background-color: rgb(25,79,139) !important;
+}
+
+
+
 td img {
 	width: 60px;
 }
@@ -165,6 +184,7 @@ footer p {
   margin-top: 10vh;
   height: 200px;
   background-color: rgb(25,79,139);
+  color: white;
 }
 
 .card-icons {
