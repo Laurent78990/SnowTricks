@@ -48,10 +48,11 @@ class Trick
      */
     private $category;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    // private $created_at;
+    // /**
+    //  * @ORM\Column(type="datetime", nullable=true)
+    //  */
+    
+     // private $created_at;
 
     // public function __construct() 
     // {
