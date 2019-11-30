@@ -20,21 +20,27 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TrickController extends AbstractController
 {
+    // =======================================================
     /**
      * @Route("/", name="trick_index", methods={"GET"})
      */
     public function index(TrickRepository $trickRepository): Response
     {
+        setcookie('Page_Home', 'active', time() + (3600 * 3), "/"); // last for 3 hours
+        setcookie('Page_Index', '', time() + (3600 * 3), "/");
+        setcookie('Page_New', '', time() + (3600 * 3), "/");
+
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
             'page_title' => 'List of Tricks',
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/new", name="trick_new", methods={"GET","POST"})
      */
-    public function new(Request $request,  FileUploader $fileUploader): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
@@ -43,7 +49,6 @@ class TrickController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             // ... Begin the cover file upload
-            
              /** @var UploadedFile $coverFile */
              $coverFile = $form['cover']->getData();
 
@@ -53,8 +58,8 @@ class TrickController extends AbstractController
                 $coverFileName = $fileUploader->upload($coverFile);
                 $trick->setcover($coverFileName);
              }
-
             // ... End cover file upload
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -62,13 +67,19 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('trick_index');
         }
 
-        return $this->render('trick/new.html.twig', [
+        setcookie('Page_Home', '', time() + (3600 * 3), "/"); // last for 3 hours
+        setcookie('Page_Index', '', time() + (3600 * 3), "/");
+        setcookie('Page_New', 'active', time() + (3600 * 3), "/");
+
+            return $this->render('trick/new.html.twig', [
+            // return $this->render('trick/modal_new.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
-            'page_title' => 'Create new Trick',
+            'page_title' => 'Create a new Trick',
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/{id}", name="trick_show", methods={"GET"})
      */
@@ -80,15 +91,29 @@ class TrickController extends AbstractController
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/{id}/edit", name="trick_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Trick $trick): Response
+    public function edit(Request $request, Trick $trick, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // ... Begin the cover file upload
+             /** @var UploadedFile $coverFile */
+             $coverFile = $form['cover']->getData();
+
+             // this condition is needed because the 'cover' field is not required
+             // so the JPG file must be processed only when a file is uploaded
+             if ($coverFile) {
+                $coverFileName = $fileUploader->upload($coverFile);
+                $trick->setcover($coverFileName);
+             }
+            // ... End cover file upload
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('trick_index');
@@ -101,6 +126,7 @@ class TrickController extends AbstractController
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/{id}", name="trick_delete", methods={"DELETE"})
      */

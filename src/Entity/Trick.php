@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
@@ -10,8 +11,10 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class Trick
 {   
-    use TimestampableEntity;
     
+    use TimestampableEntity;
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -45,6 +48,17 @@ class Trick
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    // private $created_at;
+
+    // public function __construct() 
+    // {
+    //     $this->created_at = new \Datetime();
+    // }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,12 +76,12 @@ class Trick
         return $this;
     }
 
-    public function getCover(): ?string
+    public function getCover()  // : ?string NON ! on va retourner un objet OU un string
     {
         return $this->cover;
     }
 
-    public function setCover(string $cover): self
+    public function setCover($cover): self    // pareil, on a viré le type string
     {
         $this->cover = $cover;
 
@@ -106,6 +120,18 @@ class Trick
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

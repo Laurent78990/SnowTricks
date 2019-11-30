@@ -22,6 +22,36 @@ background-color: rgba(43, 119, 122, 0.4);
 padding: 10px;
 }
 
+nav.navbar {
+  background: transparent !important;
+}
+nav.navbar.active {
+  font-weight: 400 !important;
+}
+nav.navbar-black04 {
+  background-color: rgba(25,79,139, 0.4) !important;
+}
+nav.navbar-black07 {
+  background-color: rgba(25,79,139, 0.7) !important;
+}
+nav.navbar-black10 {
+  background-color: rgb(25,79,139) !important;
+}
+
+form {
+  display: inline-block;
+}
+
+#trick > div {
+  margin: 10px;
+}
+
+/* Background colors */
+.gradient-blue {
+  background-image: linear-gradient(120deg,#c6f8fa 0,#866cfa 150%);
+}
+
+/* Tables setup */
 td img {
 	width: 60px;
 }
@@ -38,6 +68,11 @@ th.txt-center {
 #navbar li {
 	display: inline-block;
 }
+
+table.trick-show tbody {
+  display: flex;
+}
+
 
 /* =================================================== */
 /* Used for <header> */
@@ -63,11 +98,12 @@ height: 80%;
 , .container-fluid 
 {
   height: inherit;
+  padding: 0;
 }
 
-.padd-0 { padding: 0;}
-
-/* h1 {margin-top: 75px;} */
+h1 {
+  text-align: center;
+}
 
 h1::after {
   /* content: url("../images/logo-after.png"); */
@@ -109,6 +145,49 @@ div img {
   margin: 0 auto;
 }
 
+
+div.row.trick-full {
+  position: relative;
+}
+.about.card-icons {
+  height: fit-content;
+}
+div.row.trick-full img {
+  /* width: unset; */
+  /* height: 60vh; */
+  border: 5px #fff solid;
+}
+
+.form-group input
+, .form-group select
+, .form-group .custom-file-label
+, .form-group textarea
+{
+  background-image: linear-gradient(120deg, #d8f7e8, #1f75d5 150%);
+}
+.form-group > label {
+  display: none;
+}
+
+.trick-comment p {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 3vh;
+}
+
+.about.card-icons {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: gainsboro;
+  border-radius: 5px;
+}
+
+.about.card-icons i{
+  margin: 5px;
+  padding: 0;
+}
+
 /* =================================================== */
 .fas { font-size:22px;}
 
@@ -126,13 +205,13 @@ div img {
 }
 
 div.gallery.container {
-  margin-top: 11vh;
+  margin-top: 10vh;
 }
 
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  background-color: DodgerBlue;
+  /* background-color: DodgerBlue; */
 }
 
 .flex-container > div.card {
@@ -165,6 +244,7 @@ footer p {
   margin-top: 10vh;
   height: 200px;
   background-color: rgb(25,79,139);
+  color: white;
 }
 
 .card-icons {
@@ -181,7 +261,7 @@ footer p {
 }
 
   .flex-container {
-    background-color: goldenrod;
+    /* background-color: goldenrod; */
   }
   
   div.flex-container > div.card {
