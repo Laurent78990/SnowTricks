@@ -9,7 +9,11 @@ use App\Entity\Category; // adding the target Entity
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Symfony\Component\Form\AbstractType;
+
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -19,11 +23,32 @@ class TrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+        
+            ->add('name', TextType::class , [
+                'label' => 'Trick name',
+                'attr' => [
+                    'class' => 'a-css-class; gradient-blue',
+                    'placeholder' => 'New trick name...',
+                ],
+            ])
+            
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'a-css-class; gradient-blue',
+                    'placeholder' => 'Select a category...',
+                ],
+            ])
 
              // ...
              ->add('cover', FileType::class, [
-                'label' => 'Image (jpg, png)',
+                'label' => 'Load a picture (jpg, png)',
+
+                'attr' => [
+                    'class' => 'a-css-class; gradient-blue',
+                    'placeholder' => 'Select a .jpg or .png picture...',
+                ],
 
                 // unmapped means that this field is not associated to any TRICK property
                 'mapped' => false,
@@ -47,14 +72,15 @@ class TrickType extends AbstractType
             ])
             // ...
             
-            ->add('comment')
+            ->add('comment', TextareaType::class, [
 
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'a-css-class; gradient-blue',
+                    'placeholder' => 'You can type in or paste the texte here...',
+                ],
             ])
 
-            ->add('author')
+            // ->add('author')
         ;
     }
 

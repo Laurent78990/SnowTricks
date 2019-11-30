@@ -20,17 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TrickController extends AbstractController
 {
+    // =======================================================
     /**
      * @Route("/", name="trick_index", methods={"GET"})
      */
     public function index(TrickRepository $trickRepository): Response
     {
+        setcookie('Page_Home', 'active', time() + (3600 * 3), "/"); // last for 3 hours
+        setcookie('Page_Index', '', time() + (3600 * 3), "/");
+        setcookie('Page_New', '', time() + (3600 * 3), "/");
+
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
             'page_title' => 'List of Tricks',
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/new", name="trick_new", methods={"GET","POST"})
      */
@@ -61,13 +67,19 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('trick_index');
         }
 
-        return $this->render('trick/new.html.twig', [
+        setcookie('Page_Home', '', time() + (3600 * 3), "/"); // last for 3 hours
+        setcookie('Page_Index', '', time() + (3600 * 3), "/");
+        setcookie('Page_New', 'active', time() + (3600 * 3), "/");
+
+            return $this->render('trick/new.html.twig', [
+            // return $this->render('trick/modal_new.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
-            'page_title' => 'Create new Trick',
+            'page_title' => 'Create a new Trick',
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/{id}", name="trick_show", methods={"GET"})
      */
@@ -79,6 +91,7 @@ class TrickController extends AbstractController
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/{id}/edit", name="trick_edit", methods={"GET","POST"})
      */
@@ -113,6 +126,7 @@ class TrickController extends AbstractController
         ]);
     }
 
+    // =======================================================
     /**
      * @Route("/{id}", name="trick_delete", methods={"DELETE"})
      */

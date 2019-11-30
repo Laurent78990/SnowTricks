@@ -1,53 +1,81 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{page_title}}
+{{page_title}}
 {% endblock %}
 
 {% block body %}
 
-    <h1>{{page_title}}</h1>
+<div class="container">
+    <div>
+        <h1>{{ trick.name }}</h1>
+    </div>
+    
+    <div class="row trick-full">
+        <img src="../images/{{ trick.cover }}" alt="{{ trick.cover }}" />
+    
+        <span class="about card-icons">
+            <a title="Edit" href="{{ path('trick_edit', {'id': trick.id}) }}">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+            
+            <form method="post" action="{{ path('trick_delete', {'id': trick.id}) }}"
+                onsubmit="return confirm('Are you sure you want to delete this item?');">
+            
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
+                
+                <button title="Delete" class="btn-delete"><i class="fas fa-trash-alt"></i></button>
+            </form>
+        </span>
+    
+        <div class="row">
+            <div class="row">
+                <div class="indigo col-6">XXX
+                </div>
+                <div class="green col-6">YYY
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div class="trick-comment">
+            <p>
+                {{ trick.comment }}
+            </p>
+        </div>
+    
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trick.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ trick.name }}</td>
-            </tr>
-            <tr>
-                <th>Cover</th>
-                <td>{{ trick.cover }}</td>
-            </tr>
-            <tr>
-                <th>Comment</th>
-                <td>{{ trick.comment }}</td>
-            </tr>
-            <tr>
-                <th>Category</th>
-                <td>{{ trick.category.name }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>{{ trick.author }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <hr>
 
-    <a class="btn btn-sm btn-info" href="{{ path('trick_index') }}#trickGallery">back to list</a>
+<table class="table trick-show">
+    <tbody>
+        <tr>
+            <th>Category</th>
+            <td>{{ trick.category.name }}</td>
+        </tr>
+        <tr>
+            <th>Author</th>
+            <td>{{ trick.author }}</td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+            {# <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
+        </tr>
+        <tr>
+            <th>UpdatedAt</th>
+            {# <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+        </tr>
+    </tbody>
+</table>
 
-    <a class="btn btn-sm btn-outline-warning" href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
+<a class="btn btn-sm btn-info" href="{{ path('trick_index') }}#trickGallery">back to list</a>
 
-    {{ include('trick/_delete_form.html.twig') }}
+<a class="btn btn-sm btn-outline-warning" href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
+
+{{ include('trick/_delete_form.html.twig') }}
+
+
+</div>
+
 {% endblock %}
