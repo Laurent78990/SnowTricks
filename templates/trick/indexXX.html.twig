@@ -33,7 +33,7 @@
                     <td>{{ trick.comment }}</td>
                     <td>{{ trick.category.name }}</td>
                     <td>{{ trick.author }}</td>
-                    <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i') : '' }}</td>
+                    {# <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i') : '' }}</td> #}
                     <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i') : '' }}</td>
                     <td>
                         <a class="btn btn-sm btn-outline-success" href="{{ path('trick_show', {'id': trick.id}) }}">show</a>

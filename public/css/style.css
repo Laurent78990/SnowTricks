@@ -9,6 +9,7 @@ main {
 .banner {
   position: relative;
   margin-top: -70px;
+  margin-bottom: 80px;
 }
 
 .banner-box {
@@ -40,6 +41,10 @@ nav.navbar-black10 {
 
 form {
   display: inline-block;
+}
+div.form-header {
+  padding: 10px;
+  color: aliceblue;
 }
 
 #trick > div {
@@ -73,6 +78,10 @@ table.trick-show tbody {
   display: flex;
 }
 
+.text-truncate {
+  max-width: 130px;
+}
+
 
 /* =================================================== */
 /* Used for <header> */
@@ -82,12 +91,25 @@ html, body {
   height: 100%;
 }
 
-/* .card {width:120px !important;} */
+.card {
+  width:80%;
+  margin: 0 auto;
+}
+
+.card-block form {
+  width: 80%;
+  margin-left: 10%;
+}
 
 .card-body {
   text-align: left;
   padding: 0 5px;
 }
+
+.md-form i {
+  margin-left: -8%;
+}
+
 h4 {font-size: 20px;}
 
 .view {
@@ -166,7 +188,7 @@ div.row.trick-full img {
   background-image: linear-gradient(120deg, #d8f7e8, #1f75d5 150%);
 }
 .form-group > label {
-  display: none;
+  display: inline-block;
 }
 
 .trick-comment p {
@@ -192,7 +214,7 @@ div.row.trick-full img {
 .fas { font-size:22px;}
 
 .fa-pencil-alt {
-  margin-left: 20px;
+  /* margin-left: 20px; */
   color: forestgreen;
 }
 
@@ -204,9 +226,9 @@ div.row.trick-full img {
   right: 1vh;
 }
 
-div.gallery.container {
+/* div.gallery.container {
   margin-top: 10vh;
-}
+} */
 
 .flex-container {
   display: flex;
@@ -238,6 +260,10 @@ div.gallery.container {
   border: none;
   display: inline-block;
   color: brown;
+}
+.btn-register {
+  background-color: rgb(25,79,139);
+  color: aliceblue;
 }
 
 footer p {

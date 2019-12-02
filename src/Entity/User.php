@@ -3,13 +3,20 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; // XXX
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // XXX
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * 
+ * @UniqueEntity(fields="email", message="This eMail already exists!")
  */
 class User implements UserInterface
 {
+
+    // PROPERTIES ======================================
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,25 +25,52 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="json")
+     /**
+     * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank()
      */
-    private $roles = [];
+    private $username;
 
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+    
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
 
+    // /**
+    //  * @ORM\Column(type="json")
+    //  */
+    // private $roles = [];
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
+    public function __construct() {
+        $this->roles = array('ROLE_USER'); // par défaut
+    }
+
+
+    // METHODS ======================================
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getEmail(): ?string
     {
@@ -50,64 +84,80 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
+    
+    public function getUsername()
     {
-        return (string) $this->email;
+        return $this->username;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
+    public function setUsername($username)
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        $this->username = $username;
     }
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
+    
+    // /**
+    //  * @see UserInterface
+    //  */
+    // public function getRoles(): array
+    // {
+    //     $roles = $this->roles;
+    //     // guarantee every user at least has ROLE_USER
+    //     $roles[] = 'ROLE_USER';
 
-        return $this;
+    //     return array_unique($roles);
+    // }
+
+    // public function setRoles(array $roles): self
+    // {
+    //     $this->roles = $roles;
+
+    //     return $this;
+    // }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function setPlainPassword($password)
     {
-        return (string) $this->password;
+        $this->plainPassword = $password;
     }
 
-    public function setPassword(string $password): self
+    // /**
+    //  * @see UserInterface
+    //  */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password)
     {
         $this->password = $password;
+    }    
 
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
+    // /**
+    //  * @see UserInterface
+    //  */
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
-    /**
-     * @see UserInterface
-     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    // /**
+    //  * @see UserInterface
+    //  */
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
 }

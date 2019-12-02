@@ -65,7 +65,7 @@ class TrickController extends AbstractController
             // auteur par défaut
             $trick->setAuthor(1);
 
-            // $trick->setCreatedAt(new \DateTime());
+            $trick->setCreatedAt(new \DateTime());
 
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -119,7 +119,7 @@ class TrickController extends AbstractController
              }
             // ... End cover file upload
 
-            // $trick->setUpdatedAt(new \DateTime());
+            $trick->setUpdatedAt(new \DateTime());
 
             $this->getDoctrine()->getManager()->flush();
 

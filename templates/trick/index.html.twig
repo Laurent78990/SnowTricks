@@ -39,13 +39,7 @@
 <!--Banner-->
 
 <!--Gallery-->
-<div id="trickGallery">
-  <h2>Gallerie de photos et vidéos</h2>
-</div>
-<!--Gallery-->
-
-<!--Gallery 2 (?)-->
-<div class="gallery container">
+<div id="trickGallery" class="gallery container">
   <h1 class="text-center">{{page_title}}</h1>
   
   <div class="flex-container">
@@ -58,7 +52,7 @@
       </a>
       
       <div class="card-body">
-        <h4 class="card-title">{{ trick.name }}</h4>
+        <h4 class="card-title text-truncate">{{ trick.name }}</h4>
 
         <span class="card-icons">
           <a title="Edit" href="{{ path('trick_edit', {'id': trick.id}) }}">
@@ -84,7 +78,7 @@
   {% endfor %}
 
 </div>
-<!--Gallery 2 (?)-->
+<!--Gallery-->
 
 <a class="btn btn-lg btn-green mt-3 text-center" href="{{ path('trick_new') }}">Create new</a>
 
