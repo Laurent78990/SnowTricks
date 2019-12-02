@@ -38,6 +38,23 @@ class TrickController extends AbstractController
 
     // =======================================================
     /**
+     * @Route("/gallery", name="trick_gallery", methods={"GET"})
+     */
+    public function gallery(TrickRepository $trickRepository): Response
+    {
+        setcookie('Page_Home', 'active', time() + (3600 * 3), "/"); // last for 3 hours
+        setcookie('Page_Index', '', time() + (3600 * 3), "/");
+
+        return $this->render('trick/index.html.twig', [
+        // return $this->render('trick/index.html.twig#trickGallery', [
+            'tricks' => $trickRepository->findAll(),
+            'page_title' => 'List of Tricks',
+            'nav_active' => 'Home',
+        ]);
+    }
+
+    // =======================================================
+    /**
      * @Route("/new", name="trick_new", methods={"GET","POST"})
      */
     public function new(Request $request, FileUploader $fileUploader): Response

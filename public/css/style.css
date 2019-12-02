@@ -2,6 +2,13 @@ body {
 	background-color: lightgrey;
 }
 
+h1 {
+  text-align: center;
+}
+h1::after {
+  /* content: url("../images/logo-after.png"); */
+}
+
 main {
   margin-top: 70px;
 }
@@ -122,13 +129,20 @@ height: 80%;
   height: inherit;
   padding: 0;
 }
-
-h1 {
-  text-align: center;
+.container > .card {
+  min-height: 45vh;
+  top: 20vh;
 }
-
-h1::after {
-  /* content: url("../images/logo-after.png"); */
+.card-block {
+  position: relative;
+}
+.card-block.user-logged {
+  top: 15vh;
+}
+.card-block.user-sign-in {
+  top: 6vh;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .view {
