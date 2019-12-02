@@ -19,6 +19,8 @@
 
 <body>
 
+
+
 {# ================================================================================================================ #}
   <!--Navigation-->
   <header>
@@ -44,7 +46,11 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="../connexion">Sign in</a>
+            <a class="nav-link" href="{{ path('app_login') }}">Sign in</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}">Log out</a>
           </li>
           
           <li class="nav-item">

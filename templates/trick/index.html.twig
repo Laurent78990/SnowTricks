@@ -7,6 +7,17 @@
 
 {% block body %}
 
+{% if nav_active == 'Home' %}
+  {# {{ dump(nav_active) }} #}
+  {# <h1>Active: {{nav_active}}</h1> #}
+  {# <h1>Home</h1> #}
+{%  endif %}
+
+{% if nav_active == 'Tricks' %}
+  {# {{ dump(nav_active) }} #}
+  {# <h1>Active: {{nav_active}}</h1> #}
+{%  endif %}
+
 <!--Banner-->
 <div class="banner container-fluid">
   <div class="view intro-2">
@@ -28,13 +39,7 @@
 <!--Banner-->
 
 <!--Gallery-->
-<div id="trickGallery">
-  <h2>Gallerie de photos et vidéos</h2>
-</div>
-<!--Gallery-->
-
-<!--Gallery 2 (?)-->
-<div class="gallery container">
+<div id="trickGallery" class="gallery container">
   <h1 class="text-center">{{page_title}}</h1>
   
   <div class="flex-container">
@@ -47,7 +52,7 @@
       </a>
       
       <div class="card-body">
-        <h4 class="card-title">{{ trick.name }}</h4>
+        <h4 class="card-title text-truncate">{{ trick.name }}</h4>
 
         <span class="card-icons">
           <a title="Edit" href="{{ path('trick_edit', {'id': trick.id}) }}">
@@ -73,14 +78,14 @@
   {% endfor %}
 
 </div>
-<!--Gallery 2 (?)-->
+<!--Gallery-->
 
-{# <a class="btn btn-lg btn-green mt-3 text-center" href="{{ path('trick_new') }}">Create new</a> #}
+<a class="btn btn-lg btn-green mt-3 text-center" href="{{ path('trick_new') }}">Create new</a>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-lg btn-green mt-5" data-toggle="modal" 
+{# <button type="button" class="btn btn-lg btn-green mt-5" data-toggle="modal" 
     data-target="trick/modal_new.html.twig">
     Create new
-</button>
+</button> #}
 
 {% endblock %} {# End block body #}

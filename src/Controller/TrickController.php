@@ -28,11 +28,28 @@ class TrickController extends AbstractController
     {
         setcookie('Page_Home', 'active', time() + (3600 * 3), "/"); // last for 3 hours
         setcookie('Page_Index', '', time() + (3600 * 3), "/");
-        setcookie('Page_New', '', time() + (3600 * 3), "/");
 
         return $this->render('trick/index.html.twig', [
             'tricks' => $trickRepository->findAll(),
             'page_title' => 'List of Tricks',
+            'nav_active' => 'Home',
+        ]);
+    }
+
+    // =======================================================
+    /**
+     * @Route("/gallery", name="trick_gallery", methods={"GET"})
+     */
+    public function gallery(TrickRepository $trickRepository): Response
+    {
+        setcookie('Page_Home', 'active', time() + (3600 * 3), "/"); // last for 3 hours
+        setcookie('Page_Index', '', time() + (3600 * 3), "/");
+
+        return $this->render('trick/index.html.twig', [
+        // return $this->render('trick/index.html.twig#trickGallery', [
+            'tricks' => $trickRepository->findAll(),
+            'page_title' => 'List of Tricks',
+            'nav_active' => 'Home',
         ]);
     }
 
@@ -61,6 +78,12 @@ class TrickController extends AbstractController
             // ... End cover file upload
             
             $entityManager = $this->getDoctrine()->getManager();
+            
+            // auteur par défaut
+            $trick->setAuthor(1);
+
+            $trick->setCreatedAt(new \DateTime());
+
             $entityManager->persist($trick);
             $entityManager->flush();
 
@@ -68,8 +91,7 @@ class TrickController extends AbstractController
         }
 
         setcookie('Page_Home', '', time() + (3600 * 3), "/"); // last for 3 hours
-        setcookie('Page_Index', '', time() + (3600 * 3), "/");
-        setcookie('Page_New', 'active', time() + (3600 * 3), "/");
+        setcookie('Page_Index', 'active', time() + (3600 * 3), "/");
 
             return $this->render('trick/new.html.twig', [
             // return $this->render('trick/modal_new.html.twig', [
@@ -113,6 +135,8 @@ class TrickController extends AbstractController
                 $trick->setcover($coverFileName);
              }
             // ... End cover file upload
+
+            $trick->setUpdatedAt(new \DateTime());
 
             $this->getDoctrine()->getManager()->flush();
 

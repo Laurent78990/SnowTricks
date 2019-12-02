@@ -1,0 +1,51 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<!--Form with header-->
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-block">
+
+            <!--Header-->
+            <div class="form-header blue-gradient">
+                <h3><i class="fa fa-user"></i> User registration</h3>
+            </div>
+
+            {{ form_start(form) }}
+
+                <div class="md-form">
+                    <i class="fa fa-user prefix"></i>
+                    {{ form_row(form.username) }}
+                </div>
+
+                <div class="md-form">
+                    <i class="fa fa-envelope prefix"></i>
+                    {{ form_row(form.email) }}
+                </div>
+
+                <div class="md-form">
+                    <i class="fa fa-lock prefix"></i>
+                    {{ form_row(form.plainPassword.first) }}
+                </div>
+
+                <div class="md-form">
+                    <i class="fa fa-lock prefix"></i>
+                    {{ form_row(form.plainPassword.second) }}
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn btn-register" type="submit">Sign up</button>
+                </div>        
+
+            {{ form_end(form) }}
+
+        </div>{# End class="card-block"> #}
+    </div> {# End class="card"> #}
+</div> {# End class="container"> #}
+
+{% endblock %}

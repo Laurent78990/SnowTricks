@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+// use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
@@ -12,7 +12,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Trick
 {   
     
-    use TimestampableEntity;
+    // use TimestampableEntity;
 
 
     /**
@@ -49,14 +49,16 @@ class Trick
     private $category;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    // private $created_at;
+    private $updatedAt;
 
-    // public function __construct() 
-    // {
-    //     $this->created_at = new \Datetime();
-    // }
+
 
 
     public function getId(): ?int
@@ -126,13 +128,26 @@ class Trick
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
 }

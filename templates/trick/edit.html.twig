@@ -7,7 +7,27 @@
 {% block body %}
     <h1>{{page_title}}</h1>
 
-    {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
+    {# {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }} #}
+
+ {{ form_start(form) }}
+
+        {{ form_widget(form.name) }}
+
+        {{ form_widget(form.category) }}
+
+        {{ form_widget(form.comment) }}
+
+        <img src="{{ asset('images/' ~ trick.cover) }}" alt="{{ trick.cover }}" />
+
+        {{ form_widget(form.cover) }}
+
+        <button class="btn btn-lg btn-warning">{{ button_label|default('Save') }}</button>
+    
+    {{ form_end(form) }}
+
+
+
+
 
     <a class="btn btn-sm btn-info" href="{{ path('trick_index') }}#trickGallery">back to list</a>
 
