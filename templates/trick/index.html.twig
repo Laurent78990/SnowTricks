@@ -7,17 +7,6 @@
 
 {% block body %}
 
-{% if nav_active == 'Home' %}
-  {# {{ dump(nav_active) }} #}
-  {# <h1>Active: {{nav_active}}</h1> #}
-  {# <h1>Home</h1> #}
-{%  endif %}
-
-{% if nav_active == 'Tricks' %}
-  {# {{ dump(nav_active) }} #}
-  {# <h1>Active: {{nav_active}}</h1> #}
-{%  endif %}
-
 <!--Banner-->
 <div class="banner container-fluid">
   <div class="view intro-2">
@@ -44,11 +33,17 @@
   
   <div class="flex-container">
     
+    {# Check last index of the array #}
+    {% set lastKey = 0 %}
+    {% for key in tricks|keys %}
+        {% set lastKey = key %}
+    {% endfor %}
+
     {% for trick in tricks %}
     
     <div class="card">
       <a title="Show" href="{{ path('trick_show', {'id': trick.id}) }}">
-        <img class="card-img-top" src="../images/{{ trick.cover }}" alt="{{ trick.cover }}" />
+        <img class="card-img-top" src="{{ asset('images') }}/{{ trick.cover }}" alt="{{ trick.cover }}" />
       </a>
       
       <div class="card-body">
@@ -60,7 +55,7 @@
           </a>
           
           <form method="post" action="{{ path('trick_delete', {'id': trick.id}) }}"
-          onsubmit="return confirm('Are you sure you want to delete this item?');">
+          onsubmit="return confirm('êtes-vous certain de vouloir supprimer ce trick ?');">
           
           <input type="hidden" name="_method" value="DELETE">
           <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
@@ -74,13 +69,26 @@
 
   {# Si la gallerie est vide #}
   {% else %}
-  <h3>no records found</h3>
+  <h3>Il n'y a plus d'autre figure à afficher.</h3>
   {% endfor %}
 
 </div>
-<!--Gallery-->
+<!-- End of Gallery-->
 
-<a class="btn btn-lg btn-green mt-3 text-center" href="{{ path('trick_new') }}">Create new</a>
+<div class="text-center">
+
+  {% if current_page > 0 %}
+    <a class="btn btn-sm btn-info mt-3" href="{{ path('previous_page') }}">Charger 15 précédents</a>
+  {% endif %}
+
+  <a class="btn btn-green mt-3" href="{{ path('trick_new') }}">Ajouter une figure</a>
+
+  {% if lastKey == 14 %}
+  {# {% if tricks|length == 14 %} #}
+    <a class="btn btn-sm btn-info mt-3" href="{{ path('next_page') }}">Charger 15 suivants</a>
+  {% endif %}
+
+</div>
 
 <!-- Button trigger modal -->
 {# <button type="button" class="btn btn-lg btn-green mt-5" data-toggle="modal" 

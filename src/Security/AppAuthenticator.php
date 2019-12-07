@@ -89,7 +89,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
 
         // XXX redirect to some "app_homepage" route - of wherever you want
-        return new RedirectResponse($this->urlGenerator->generate('trick_new'));
+        return new RedirectResponse($this->urlGenerator->generate('trick_index') .'#trickGallery' );
 
     }
 

@@ -1,5 +1,12 @@
+/* ==================================================== */
+:root {
+--bg-body: lightblue;
+--bg-snowtrick: rgb(25,79,139);
+}
+/* ==================================================== */
+
 body {
-	background-color: lightgrey;
+	background-color: var(--bg-body);
 }
 
 h1 {
@@ -31,19 +38,21 @@ padding: 10px;
 }
 
 nav.navbar {
-  background: transparent !important;
+  /* background: transparent !important; */
+  background: transparent;
 }
 nav.navbar.active {
   font-weight: 400 !important;
 }
 nav.navbar-black04 {
-  background-color: rgba(25,79,139, 0.4) !important;
+  background-color: rgba(25,79,139, 0.4);
 }
 nav.navbar-black07 {
-  background-color: rgba(25,79,139, 0.7) !important;
+  background-color: rgba(25,79,139, 0.7);
 }
-nav.navbar-black10 {
-  background-color: rgb(25,79,139) !important;
+nav.navbar-black10,
+.navbar-opacity {
+  background-color: var(--bg-snowtrick) !important;
 }
 
 form {
@@ -52,6 +61,21 @@ form {
 div.form-header {
   padding: 10px;
   color: aliceblue;
+}
+
+.form-edit form{
+  width: 55%;
+}
+.form-edit .trick-input-field {
+  margin: 3px auto;
+  border-style: inset;
+}
+div.flex-center label.mr-3.text-left {
+  width: 15%;
+}
+
+div.custom-file {
+  text-align: left;
 }
 
 #trick > div {
@@ -113,7 +137,15 @@ html, body {
   padding: 0 5px;
 }
 
-.md-form i {
+.card-show-trick {
+  width: 15%;
+  display: inline-flex;
+  margin: 5px;
+}
+
+.md-form i
+/* , h1 i.fa-user */
+{
   margin-left: -8%;
 }
 
@@ -131,7 +163,7 @@ height: 80%;
 }
 .container > .card {
   min-height: 45vh;
-  top: 20vh;
+  top: 10vh;
 }
 .card-block {
   position: relative;
@@ -139,7 +171,8 @@ height: 80%;
 .card-block.user-logged {
   top: 15vh;
 }
-.card-block.user-sign-in {
+.card-block.user-sign-in,
+.card-block.user-register {
   top: 6vh;
   width: 80%;
   margin: 0 auto;
@@ -182,6 +215,11 @@ div img {
 }
 
 
+.width-trick-edit {
+  width: 30%;
+  border: 5px #fff solid;
+}
+
 div.row.trick-full {
   position: relative;
 }
@@ -189,18 +227,19 @@ div.row.trick-full {
   height: fit-content;
 }
 div.row.trick-full img {
-  /* width: unset; */
-  /* height: 60vh; */
+  width: unset;
+  max-height: 55vh;
   border: 5px #fff solid;
 }
 
-.form-group input
-, .form-group select
+/* .form-group input,  */
+.form-group select
 , .form-group .custom-file-label
 , .form-group textarea
 {
   background-image: linear-gradient(120deg, #d8f7e8, #1f75d5 150%);
 }
+
 .form-group > label {
   display: inline-block;
 }
@@ -215,7 +254,7 @@ div.row.trick-full img {
   position: absolute;
   right: 10px;
   top: 10px;
-  background-color: gainsboro;
+  /* background-color: var(--bg-body); */
   border-radius: 5px;
 }
 
@@ -275,15 +314,16 @@ div.row.trick-full img {
   display: inline-block;
   color: brown;
 }
-.btn-register {
-  background-color: rgb(25,79,139);
+.btn-register,
+.btn-info {
+  background-color: var(--bg-snowtrick) !important;
   color: aliceblue;
 }
 
 footer p {
   margin-top: 10vh;
   height: 200px;
-  background-color: rgb(25,79,139);
+  background-color: var(--bg-snowtrick);
   color: white;
 }
 
