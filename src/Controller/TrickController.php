@@ -9,6 +9,8 @@ use App\Form\TrickType;
 use App\Form\CommentaireType;
 
 use App\Repository\TrickRepository;
+use App\Repository\CommentaireRepository;
+
 use App\Service\FileUploader;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,7 +50,6 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/nextpage", name="next_page", methods={"GET"})
      */
-    // public function gallery(TrickRepository $trickRepository, $page): Response
     public function galleryNext(TrickRepository $trickRepository): Response
     {
         $loadPage = isset( $_COOKIE['loadPage'] ) ? $_COOKIE['loadPage'] : 99;
@@ -92,11 +93,6 @@ class TrickController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
         
-        // $userId = $user->getId();
-        // $username = $user->getUsername();
-        
-        // var_dump($userId); die();
-
         if ($form->isSubmitted() && $form->isValid()) {
             
             // ... Begin the cover file upload
@@ -113,16 +109,7 @@ class TrickController extends AbstractController
             
             $entityManager = $this->getDoctrine()->getManager();
             
-            // auteur par défaut
-            // $trick->setUsername($userId);
-            // $trick->setUsername($username);
-
-            //  var_dump($userId);
-            //  var_dump($username);
-            //  die();
-
             $trick->setUsername($user);
-            
             $trick->setCreatedAt(new \DateTime());
 
             $entityManager->persist($trick);
@@ -130,9 +117,6 @@ class TrickController extends AbstractController
 
             return $this->redirectToRoute('trick_index');
         }
-
-        // setcookie('Page_Home', '', time() + (3600 * 3), "/"); // last for 3 hours
-        // setcookie('Page_Index', 'active', time() + (3600 * 3), "/");
 
             return $this->render('trick/new.html.twig', [
             // return $this->render('trick/modal_new.html.twig', [
@@ -146,24 +130,38 @@ class TrickController extends AbstractController
     /**
      * @Route("show/{id}", name="trick_show", methods={"GET", "POST"})
      */
-    public function show(Request $request, Trick $trick): Response
+    public function show(Request $request, Trick $trick, CommentaireRepository $commentaireRepository): Response
     {
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
+        
+        $user = $this->getUser();
 
+        // Tableau des commentaires enregistrés
+        // $commentaire = $trick->getCommentaires(); ???
+
+        // Formulaire d'enregitrement du commentaire
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $entityManager = $this->getDoctrine()->getManager();
 
+            // $commentaire->setMessage($message);
+            $commentaire->setTrick($trick);
+            $commentaire->setAuthor($user);
+            $commentaire->setCreatedAt(new \DateTime());
 
-
-
-
-
-        }
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+            
+            return $this->redirectToRoute( 'trick_index' );
+        } // Fin enreg comment
 
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            
+            // 'commentaire' => $commentaire,
+            'comment_list' => $commentaireRepository->findAll(),
             'form' => $form->createView(),
             'page_title' => 'Présentation du Trick',
         ]);

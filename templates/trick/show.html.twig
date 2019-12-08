@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-{{page_title}}
+    {{page_title}}
 {% endblock %}
 
 {% block body %}
@@ -10,30 +10,40 @@
     <div>
         <h1>{{ trick.name }}</h1>
     </div>
+
+    {# <pre>
+        {{ dump(trick) }}
+        {{ dump(comment_list) }}
+    </pre> #}
     
     <div class="row trick-full">
-        <img src="{{ asset('images') }}/{{ trick.cover }}" alt="{{ trick.cover }}" />
+        <div class="col-2"></div>
         
-        <span class="about card-icons">
-            <a title="Edit" href="{{ path('trick_edit', {'id': trick.id}) }}">
-                <i class="fas fa-pencil-alt"></i>
-            </a>
-            
-            <form method="post" action="{{ path('trick_delete', {'id': trick.id}) }}"
-                onsubmit="return confirm('Etes-vous certain de vouloir supprimer ce trick ?');">
-            
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
-                
-                <button title="Delete" class="btn-delete"><i class="fas fa-trash-alt"></i></button>
-            </form>
-        </span>
+        <div class="col-8">
+            <img src="{{ asset('images') }}/{{ trick.cover }}" alt="{{ trick.cover }}" />
 
+            <span class="about card-icons">
+                <a title="Editer" href="{{ path('trick_edit', {'id': trick.id}) }}">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                
+                <form method="post" action="{{ path('trick_delete', {'id': trick.id}) }}"
+                    onsubmit="return confirm('Etes-vous certain de vouloir supprimer ce trick ?');">
+                
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
+                    
+                    <button title="Supprimer" class="btn-delete"><i class="fas fa-trash-alt"></i></button>
+                </form>
+            </span>
+        </div>
+
+        <div class="col-2"></div>
     </div>
     
     <!--Gallery-->
     <div id="trickGallery" class="mt-3">
-        <h2>Gallerie de photos et vidéos</h2>
+        {# <h2>Gallerie de photos et vidéos</h2> #}
         <div class="flex mt-3">
 
             <div class="card card-show-trick">
@@ -84,40 +94,53 @@
     </div>
     <!-- End Gallery-->
 
-    <div class="trick-comment">
-        <p>
-            {{ trick.comment }}
-        </p>
+    {# Infos relatives au trick #}
+    <div class="text-center mt-3">
+        <table class="table trick-show">
+            <tbody>
+                <tr>
+                    <td>Category</td>
+                    <th>{{ trick.category.name }}</th>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <th>{{ trick.username.username }}</th>
+                </tr>
+                <tr>
+                    <td>CreatedAt</td>
+                    <th>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</th>
+                </tr>
+                <tr>
+                    <td>UpdatedAt</td>
+                    <th>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</th>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <hr>
 
-    <table class="table trick-show">
-        <tbody>
-            <tr>
-                <th>Category</th>
-                <td>{{ trick.category.name }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>{{ trick.username.username }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ trick.createdAt ? trick.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ trick.updatedAt ? trick.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    {# Ajout d'un commentaire (si user connecté) #}
+    {% if app.user %}
+        {# <h3>Nouveau commentaire</h3> #}
+        
+        <div class="container">
+
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                    <button class="btn btn-warning mt-sm-n2">{{ button_label|default('Enregistrer') }}</button>
+            {{ form_end(form) }}
+        </div>
+    {% endif %}
+
+    {# Liste (inversée) des commentaires #}
+    {# The comment/description of the trick #}
+    <div class="trick-comments mt-5">
+        {% for comment in comment_list %}
+            <p> {{ comment.createdAt ? comment.createdAt|date('d-M-y H:i') : '' }} - {{ comment.author.username }} : {{ comment.message }} </p>
+        {% endfor %}
+    </div>
 
     <div class="text-center">
         <a class="btn btn-info" href="{{ path('trick_index') }}#trickGallery">Retour</a>
-
-        <a class="btn btn-warning" href="{{ path('trick_edit', {'id': trick.id}) }}">Modifier</a>
-
-        {{ include('trick/_delete_form.html.twig') }}
     </div>
 
 </div>

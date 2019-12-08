@@ -62,7 +62,6 @@ div.form-header {
   padding: 10px;
   color: aliceblue;
 }
-
 .form-edit form{
   width: 55%;
 }
@@ -70,6 +69,13 @@ div.form-header {
   margin: 3px auto;
   border-style: inset;
 }
+div > * [name=commentaire] {
+  width: 100%;
+}
+div > * [name=commentaire] label {
+  display: none;
+}
+
 div.flex-center label.mr-3.text-left {
   width: 15%;
 }
@@ -105,8 +111,17 @@ th.txt-center {
 	display: inline-block;
 }
 
+table.trick-show {
+  border: 1px solid var(--bg-snowtrick);
+}
 table.trick-show tbody {
-  display: flex;
+  display: inline-flex;
+}
+table.trick-show tbody th {
+  padding-left: 5px;
+}
+table.trick-show tbody td {
+  padding-right: 0;
 }
 
 .text-truncate {
@@ -245,7 +260,7 @@ div.row.trick-full img {
 }
 
 .trick-comment p {
-  width: 80%;
+  /* width: 80%; */
   margin: 0 auto;
   margin-top: 3vh;
 }
