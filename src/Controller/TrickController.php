@@ -138,6 +138,8 @@ class TrickController extends AbstractController
         
         $user = $this->getUser();
 
+        $nbComments = 5;
+
         // Tableau des commentaires enregistrés
         // $commentaire = $trick->getCommentaires(); ???
 
@@ -161,7 +163,8 @@ class TrickController extends AbstractController
             'trick' => $trick,
             
             // 'commentaire' => $commentaire,
-            'comment_list' => $commentaireRepository->findAll(),
+            // 'comment_list' => $commentaireRepository->findAll(),
+            'comment_list' => $commentaireRepository->getCommentsByTrickId($trick, $nbComments),
             'form' => $form->createView(),
             'page_title' => 'Présentation du Trick',
         ]);
