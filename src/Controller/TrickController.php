@@ -122,7 +122,7 @@ class TrickController extends AbstractController
             // return $this->render('trick/modal_new.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
-            'page_title' => 'Ajouter un nouveau Trick',
+            'page_title' => 'Ajouter une nouvelle figure',
         ]);
     }
 
@@ -203,7 +203,7 @@ class TrickController extends AbstractController
         return $this->render('trick/edit.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
-            'page_title' => 'Modifier ce Trick',
+            'page_title' => 'Modifier cette figure',
         ]);
     }
 

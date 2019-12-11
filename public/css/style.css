@@ -1,6 +1,6 @@
 /* ==================================================== */
 :root {
---bg-body: lightblue;
+--bg-body: #e6e7ff;
 --bg-snowtrick: rgb(25,79,139);
 }
 /* ==================================================== */
@@ -14,6 +14,10 @@ h1 {
 }
 h1::after {
   /* content: url("../images/logo-after.png"); */
+}
+
+#base-main div.container {
+  /* height: -webkit-fill-available; */
 }
 
 main {
@@ -94,6 +98,12 @@ div.custom-file {
 }
 
 /* Tables setup */
+table th,
+table td {
+  font-size: 1em;
+}
+
+
 td img {
 	width: 60px;
 }
@@ -113,15 +123,29 @@ th.txt-center {
 
 table.trick-show {
   border: 1px solid var(--bg-snowtrick);
+  text-align: left;
 }
-table.trick-show tbody {
-  display: inline-flex;
+table.trick-show th,
+table.trick-show td {
+  padding: 10px;
+  margin-left: 5px;
+  /* border: 1px solid; */
 }
-table.trick-show tbody th {
-  padding-left: 5px;
+table.trick-show tbody tr {
+  background-color: aliceblue;
 }
-table.trick-show tbody td {
-  padding-right: 0;
+
+#trick-description {
+  font-weight: initial;
+}
+
+.trick-show-title {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.dsp-flex {
+  display: flex;
 }
 
 .text-truncate {
@@ -241,6 +265,10 @@ div.row.trick-full img {
   border: 5px #fff solid;
 }
 
+.trick-new-form form {
+  width: 100%;
+}
+
 /* .form-group input,  */
 .form-group select
 , .form-group .custom-file-label
@@ -324,16 +352,24 @@ div.row.trick-full img {
   color: brown;
 }
 .btn-register,
-.btn-info {
+.btn-info,
+footer {
   background-color: var(--bg-snowtrick) !important;
   color: aliceblue;
 }
 
+footer {
+  height: 150px;
+  margin-top: 30px;
+}
+footer a:hover {
+  color: black;
+  font-size: 3vh;
+}
+
 footer p {
-  margin-top: 10vh;
-  height: 200px;
-  background-color: var(--bg-snowtrick);
   color: white;
+  font-size: 2.2vh;
 }
 
 .card-icons {

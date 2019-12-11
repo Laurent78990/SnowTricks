@@ -39,6 +39,8 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark {{navbarBg}}">
       
       <a class="navbar-brand" href="{{ path('trick_index') }}"><img id="snow-logo" src="{{ asset('images') }}/logo.png" alt="Logo SnowTricks" /></a>
+      
+      {# TO BE REMOVED #}
       {{current_route}}
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -81,13 +83,35 @@
 
 {# ================================================================================================================ #}
 <!--Main-->
-<main>
+<main id="base-main">
   {% block body %}{% endblock %}
 </main>
 
 {# ================================================================================================================ #}
 {% block footer %}
-  <footer><p>2019 &copy; Laurent</p></footer>
+  <footer>
+    <div>&nbsp;</div>
+    <div class="container">
+      <table><tbody>
+        <tr>
+          <td><a class="navbar-brand text-white" href="{{ path('trick_index') }}">SnowTricks</a></td>
+        </tr>
+        <tr>
+          <td>
+            {% if app.user %}
+              Vous êtes bien connecté {{app.user.username}}.
+            {% else %}
+              Vous n'êtes pas connecté.
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>2019 &copy; by Laurent for OpenClassrooms</td>
+        </tr>
+      </tbody></table>
+    </div>
+      
+  </footer>
 {% endblock %}
 
 {# ================================================================================================================ #}

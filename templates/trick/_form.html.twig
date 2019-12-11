@@ -1,12 +1,16 @@
 
 {# {{dump(form)}} #}
 
-    {{ form_start(form) }}
+    <div class="trick-new-form">
 
-        {{ form_widget(form) }}
+        {{ form_start(form) }}
 
-            <a class="btn btn-info" href="{{ path('trick_index') }}#trickGallery">Retour</a>
-            
-            <button class="btn btn-warning">{{ button_label|default('Enregistrer') }}</button>
-    
-    {{ form_end(form) }}
+            {{ form_widget(form) }}
+
+                <a class="btn btn-info" href="{{ path('trick_index') }}#trickGallery">Retour</a>
+                
+                <button class="btn btn-warning">{{ button_label|default('Enregistrer') }}</button>
+        
+        {{ form_end(form) }}
+
+    </div>

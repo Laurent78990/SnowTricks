@@ -25,7 +25,7 @@ class TrickType extends AbstractType
         $builder
         
             ->add('name', TextType::class , [
-                'label' => 'Trick name',
+                'label' => 'Figure',
                 'attr' => [
                     'class' => 'trick-input-field',
                     'placeholder' => 'Nom du trick...',
@@ -34,16 +34,17 @@ class TrickType extends AbstractType
             
             ->add('category', EntityType::class, [
                 'class' => Category::class,
+                'label' => 'Catégorie   ',
                 'choice_label' => 'name',
                 'attr' => [
                     'class' => 'trick-input-field',
-                    'placeholder' => 'Sélectionnez une catégorie...',
+                    // 'placeholder' => 'Sélectionnez une catégorie...',
                 ],
             ])
 
              // ...
              ->add('cover', FileType::class, [
-                'label' => 'Image du trick',
+                'label' => 'Photo',
 
                 'attr' => [
                     'class' => 'trick-input-field',
@@ -76,7 +77,7 @@ class TrickType extends AbstractType
 
                 'attr' => [
                     'class' => 'trick-input-field',
-                    'placeholder' => 'Description de ce trick',
+                    'placeholder' => 'Description de la figure',
                 ],
             ])
 

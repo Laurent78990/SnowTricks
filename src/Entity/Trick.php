@@ -65,9 +65,15 @@ class Trick
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick")
+     */
+    private $media;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
 
@@ -189,6 +195,37 @@ class Trick
             // set the owning side to null (unless already changed)
             if ($commentaire->getTrick() === $this) {
                 $commentaire->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Media[]
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
+    public function addMedium(Media $medium): self
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media[] = $medium;
+            $medium->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedium(Media $medium): self
+    {
+        if ($this->media->contains($medium)) {
+            $this->media->removeElement($medium);
+            // set the owning side to null (unless already changed)
+            if ($medium->getTrick() === $this) {
+                $medium->setTrick(null);
             }
         }
 

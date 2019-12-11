@@ -8,7 +8,9 @@
     <h1>{{page_title}}</h1>
     <hr>
 
-    {{ include('trick/_form.html.twig') }}
+    <div class="container">
+        {{ include('trick/_form.html.twig') }}
+    </div>
 
     {# <a class="btn btn-info" href="{{ path('trick_index') }}#trickGallery">Retour</a> #}
 {% endblock %}
