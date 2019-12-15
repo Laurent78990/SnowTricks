@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 // use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -38,11 +40,6 @@ class Trick
     private $comment;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $author;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tricks")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -58,6 +55,26 @@ class Trick
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
+     */
+    private $username;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="trick")
+     */
+    private $commentaires;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick")
+     */
+    private $medias;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+        $this->medias = new ArrayCollection();
+    }
 
 
 
@@ -90,6 +107,7 @@ class Trick
         return $this;
     }
 
+    // =========================================
     public function getComment(): ?string
     {
         return $this->comment;
@@ -102,18 +120,7 @@ class Trick
         return $this;
     }
 
-    public function getAuthor(): ?int
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(int $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
+    // =========================================
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -126,6 +133,7 @@ class Trick
         return $this;
     }
 
+    // =========================================
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -147,6 +155,76 @@ class Trick
     {
         $this->updatedAt = $updatedAt;
 
+        return $this;
+    }
+
+    public function getUsername(): ?User
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?User $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setTrick($this);
+        }
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->contains($commentaire)) {
+            $this->commentaires->removeElement($commentaire);
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getTrick() === $this) {
+                $commentaire->setTrick(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Media[]
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+            $media->setTrick($this);
+        }
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        if ($this->medias->contains($media)) {
+            $this->medias->removeElement($media);
+            // set the owning side to null (unless already changed)
+            if ($media->getTrick() === $this) {
+                $media->setTrick(null);
+            }
+        }
         return $this;
     }
 

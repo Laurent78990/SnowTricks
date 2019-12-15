@@ -1,5 +1,12 @@
+/* ==================================================== */
+:root {
+--bg-body: #e6e7ff;
+--bg-snowtrick: rgb(25,79,139);
+}
+/* ==================================================== */
+
 body {
-	background-color: lightgrey;
+	background-color: var(--bg-body);
 }
 
 h1 {
@@ -7,6 +14,10 @@ h1 {
 }
 h1::after {
   /* content: url("../images/logo-after.png"); */
+}
+
+#base-main div.container {
+  /* height: -webkit-fill-available; */
 }
 
 main {
@@ -31,19 +42,21 @@ padding: 10px;
 }
 
 nav.navbar {
-  background: transparent !important;
+  /* background: transparent !important; */
+  background: transparent;
 }
 nav.navbar.active {
   font-weight: 400 !important;
 }
 nav.navbar-black04 {
-  background-color: rgba(25,79,139, 0.4) !important;
+  background-color: rgba(25,79,139, 0.4);
 }
 nav.navbar-black07 {
-  background-color: rgba(25,79,139, 0.7) !important;
+  background-color: rgba(25,79,139, 0.7);
 }
-nav.navbar-black10 {
-  background-color: rgb(25,79,139) !important;
+nav.navbar-black10,
+.navbar-opacity {
+  background-color: var(--bg-snowtrick) !important;
 }
 
 form {
@@ -52,6 +65,27 @@ form {
 div.form-header {
   padding: 10px;
   color: aliceblue;
+}
+.form-edit form{
+  width: 55%;
+}
+.form-edit .trick-input-field {
+  margin: 3px auto;
+  border-style: inset;
+}
+div > * [name=commentaire] {
+  width: 100%;
+}
+div > * [name=commentaire] label {
+  display: none;
+}
+
+div.flex-center label.mr-3.text-left {
+  width: 15%;
+}
+
+div.custom-file {
+  text-align: left;
 }
 
 #trick > div {
@@ -64,6 +98,12 @@ div.form-header {
 }
 
 /* Tables setup */
+table th,
+table td {
+  font-size: 1em;
+}
+
+
 td img {
 	width: 60px;
 }
@@ -81,7 +121,30 @@ th.txt-center {
 	display: inline-block;
 }
 
-table.trick-show tbody {
+table.trick-show {
+  border: 1px solid var(--bg-snowtrick);
+  text-align: left;
+}
+table.trick-show th,
+table.trick-show td {
+  padding: 10px;
+  margin-left: 5px;
+  /* border: 1px solid; */
+}
+table.trick-show tbody tr {
+  background-color: aliceblue;
+}
+
+#trick-description {
+  font-weight: initial;
+}
+
+.trick-show-title {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.dsp-flex {
   display: flex;
 }
 
@@ -113,11 +176,24 @@ html, body {
   padding: 0 5px;
 }
 
-.md-form i {
+.card-show-trick {
+  width: 15%;
+  display: inline-flex;
+  margin: 5px;
+}
+
+.md-form i
+/* , h1 i.fa-user */
+{
   margin-left: -8%;
 }
 
 h4 {font-size: 20px;}
+
+div.card-show-trick h4.card-title {
+  font-size: 1em;
+  margin: 3px auto;;
+}
 
 .view {
 height: 80%;
@@ -131,7 +207,7 @@ height: 80%;
 }
 .container > .card {
   min-height: 45vh;
-  top: 20vh;
+  top: 10vh;
 }
 .card-block {
   position: relative;
@@ -139,7 +215,8 @@ height: 80%;
 .card-block.user-logged {
   top: 15vh;
 }
-.card-block.user-sign-in {
+.card-block.user-sign-in,
+.card-block.user-register {
   top: 6vh;
   width: 80%;
   margin: 0 auto;
@@ -176,11 +253,10 @@ div.container.text-center
   background-attachment: fixed;
 }
 
-div img {
-  width: 80%;
-  margin: 0 auto;
+.width-trick-edit {
+  width: 30%;
+  border: 5px #fff solid;
 }
-
 
 div.row.trick-full {
   position: relative;
@@ -189,33 +265,38 @@ div.row.trick-full {
   height: fit-content;
 }
 div.row.trick-full img {
-  /* width: unset; */
-  /* height: 60vh; */
+  width: 100%;
+  margin: 0 auto;
   border: 5px #fff solid;
 }
 
-.form-group input
-, .form-group select
+.trick-new-form form {
+  width: 100%;
+}
+
+/* .form-group input,  */
+.form-group select
 , .form-group .custom-file-label
 , .form-group textarea
 {
-  background-image: linear-gradient(120deg, #d8f7e8, #1f75d5 150%);
+  /* background-image: linear-gradient(120deg, #d8f7e8, #1f75d5 150%); */
 }
+
 .form-group > label {
   display: inline-block;
 }
 
 .trick-comment p {
-  width: 80%;
+  /* width: 80%; */
   margin: 0 auto;
   margin-top: 3vh;
 }
 
 .about.card-icons {
   position: absolute;
-  right: 10px;
+  right: 4vh;
   top: 10px;
-  background-color: gainsboro;
+  background-color: white;
   border-radius: 5px;
 }
 
@@ -243,6 +324,17 @@ div.row.trick-full img {
 /* div.gallery.container {
   margin-top: 10vh;
 } */
+
+#trickGallery .card-icons {
+  right: .5vh;
+  top: 6px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+#trickGallery .card-icons:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
 
 .flex-container {
   display: flex;
@@ -275,16 +367,25 @@ div.row.trick-full img {
   display: inline-block;
   color: brown;
 }
-.btn-register {
-  background-color: rgb(25,79,139);
+.btn-register,
+.btn-info,
+footer {
+  background-color: var(--bg-snowtrick) !important;
   color: aliceblue;
 }
 
+footer {
+  height: 150px;
+  margin-top: 30px;
+}
+footer a:hover {
+  color: black;
+  font-size: 3vh;
+}
+
 footer p {
-  margin-top: 10vh;
-  height: 200px;
-  background-color: rgb(25,79,139);
   color: white;
+  font-size: 2.2vh;
 }
 
 .card-icons {

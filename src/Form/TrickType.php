@@ -25,29 +25,30 @@ class TrickType extends AbstractType
         $builder
         
             ->add('name', TextType::class , [
-                'label' => 'Trick name',
+                'label' => 'Figure',
                 'attr' => [
-                    'class' => 'a-css-class; gradient-blue',
-                    'placeholder' => 'New trick name...',
+                    'class' => 'trick-input-field',
+                    'placeholder' => 'Nom du trick...',
                 ],
             ])
             
             ->add('category', EntityType::class, [
                 'class' => Category::class,
+                'label' => 'Catégorie   ',
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'a-css-class; gradient-blue',
-                    'placeholder' => 'Select a category...',
+                    'class' => 'trick-input-field',
+                    // 'placeholder' => 'Sélectionnez une catégorie...',
                 ],
             ])
 
              // ...
              ->add('cover', FileType::class, [
-                'label' => 'Load a picture (jpg, png)',
+                'label' => 'Photo',
 
                 'attr' => [
-                    'class' => 'a-css-class; gradient-blue',
-                    'placeholder' => 'Select a .jpg or .png picture...',
+                    'class' => 'trick-input-field',
+                    'placeholder' => 'Chargez une image au format .png ou .jpg',
                 ],
 
                 // unmapped means that this field is not associated to any TRICK property
@@ -66,7 +67,7 @@ class TrickType extends AbstractType
                             'image/png',
                             'image/jpeg',
                         ],
-                        'mimeTypesMessage' => 'Please upload a .png or .jpg image.',
+                        'mimeTypesMessage' => 'Chargez une image au format .png ou .jpg',
                     ])
                 ],
             ])
@@ -75,8 +76,8 @@ class TrickType extends AbstractType
             ->add('comment', TextareaType::class, [
 
                 'attr' => [
-                    'class' => 'a-css-class; gradient-blue',
-                    'placeholder' => 'You can type in or paste the texte here...',
+                    'class' => 'trick-input-field',
+                    'placeholder' => 'Description de la figure',
                 ],
             ])
 

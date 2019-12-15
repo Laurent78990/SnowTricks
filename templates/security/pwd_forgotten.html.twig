@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Mot de pass oublié{% endblock %}
 
 {% block body %}
 
@@ -9,10 +9,6 @@
         {# <div class="card-block"> #}
 
             <form method="post">
-
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
 
                 {% if app.user %}
 
@@ -30,22 +26,22 @@
                 {% else %}
                     <div class="card-block user-sign-in">
 
-                        <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-
+                        <h1 class="h3 mb-3 font-weight-normal">Mot de passe oublié</h1>
+                        
                         <label for="inputEmail">Email</label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" 
-                            class="form-control" required autofocus />
+                            class="form-control" required autofocus 
+                            placeholder="Saisissez votre email"/>
                         
-                        <label for="inputPassword">Mot de passe</label>
-                        <input type="password" name="password" id="inputPassword" 
-                            class="form-control" required />
-
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
 
                         <div class="flex-center mt-4">
-                            <button class="btn btn-primary" type="submit">Se connecter</button>
-                            <a class="btn btn-warning" href="{{ path('app_registration') }}">S'inscrire</a>
+                        
+                            <button class="btn btn-primary" type="submit">Envoyer</button>
+                            
+                            {# <a class="btn btn-warning" href="{{ path('app_registration') }}">S'inscrire</a>  #}
                         </div>
+
                     </div>
                 {% endif %}
 
@@ -60,16 +56,7 @@
                     </div>
                 #}
 
-
-                {# <a class="xxx" href="{{ path('app_reset_pwd') }}">Mot de passe oublié ?</a> #}
-                <div class="flex-center m-5">
-                    <a class="m-3" href="{{ path('app_forgotten') }}">Mot de passe oublié ?</a>
-                </div>
-
             </form>{# End Form #}
-
-
-
 
         </div>{# End class="card-block"> #}
     </div> {# End class="card"> #}
