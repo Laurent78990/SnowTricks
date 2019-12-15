@@ -26,37 +26,52 @@ class MediaController extends AbstractController
 {
 
     /**
+     * @Route("/", name="media_index", methods={"GET"})
+     */
+    public function index(MediaRepository $mediaRepository): Response
+    {
+        return $this->render('media/index.html.twig', [
+            'medias' => $mediaRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/new/{id}", name="media_new", methods={"GET","POST"})
      */
     public function new(Request $request, Trick $trick, FileUploader $fileUploader): Response
     {
-        $medium = new Media();
-        $form = $this->createForm(MediaType::class, $medium);
+
+        $media = new Media();
+        
+        $form = $this->createForm(MediaType::class, $media);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Step 1 - get the file
-              // ... Begin the cover file upload
-             /** @var UploadedFile $coverFile */
-             $coverFile = $form['cover']->getData();
+              // ... Begin the media file upload
+             /** @var UploadedFile $mediaFile */
+             $mediaFile = $form['media']->getData();
 
-            // this condition is needed because the 'cover' field is not required
+            // this condition is needed because the 'media' field is not required
             // so the JPG file must be processed only when a file is uploaded
-            if ($coverFile) {
-                $coverFileName = $fileUploader->upload($coverFile);
-                $trick->setcover($coverFileName);
+            if ($mediaFile) {
+                
+                $mediaFileName = $fileUploader->upload($mediaFile);
+                $media->setMediaName($mediaFileName);
+             
+                // var_dump($media); die;
+                $trick->addMedia($media);
             }
-            // ... End cover file upload
-
+            // ... End media file upload
 
             // Step 2 - load and save the data
             $entityManager = $this->getDoctrine()->getManager();
             
-            $medium->setTrick($trick);
-            $medium->setCreatedAt(new \DateTime());
+            $media->setTrick($trick);
+            $media->setCreatedAt(new \DateTime());
             
-            $entityManager->persist($medium);
+            $entityManager->persist($media);
             $entityManager->flush();
 
             // return $this->redirectToRoute('media_index');
@@ -64,7 +79,7 @@ class MediaController extends AbstractController
         }
 
         return $this->render('media/new.html.twig', [
-            'medium' => $medium,
+            'media' => $media,
             'form' => $form->createView(),
         ]);
     }
@@ -72,11 +87,11 @@ class MediaController extends AbstractController
     /**
      * @Route("/{id}", name="media_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Media $medium): Response
+    public function delete(Request $request, Media $media): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$medium->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$media->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($medium);
+            $entityManager->remove($media);
             $entityManager->flush();
         }
 

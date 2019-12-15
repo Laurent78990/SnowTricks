@@ -4,16 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Entity\Commentaire;
+use App\Entity\Media;
 
 use App\Form\TrickType;
 use App\Form\CommentaireType;
+use App\Form\MediaType;
 
 use App\Repository\TrickRepository;
 use App\Repository\CommentaireRepository;
+use App\Repository\MediaRepository;
 
 use App\Service\FileUploader;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
@@ -130,7 +133,7 @@ class TrickController extends AbstractController
     /**
      * @Route("show/{id}", name="trick_show", methods={"GET", "POST"})
      */
-    public function show(Request $request, Trick $trick, CommentaireRepository $commentaireRepository): Response
+    public function show(Request $request, Trick $trick, CommentaireRepository $commentaireRepository, MediaRepository $mediaRepository): Response
     {
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class, $commentaire);
@@ -165,6 +168,10 @@ class TrickController extends AbstractController
             // 'commentaire' => $commentaire,
             // 'comment_list' => $commentaireRepository->findAll(),
             'comment_list' => $commentaireRepository->getCommentsByTrickId($trick, $nbComments),
+
+            // List of medias
+            'media_list' => $mediaRepository->getMediasByTrickId($trick),
+
             'form' => $form->createView(),
             'page_title' => 'Présentation du Trick',
         ]);

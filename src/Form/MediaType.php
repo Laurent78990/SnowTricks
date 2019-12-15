@@ -17,12 +17,14 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mediaName')
+            ->add('name')
+
+            // ->add('mediaName')
             // ->add('createdAt') // tbd in the ctrlr
             // ->add('trick')     // tbd in the ctrlr
 
             // ...
-            ->add('cover', FileType::class, [
+            ->add('media', FileType::class, [
                 'label' => 'Média',
 
                 'attr' => [
@@ -41,10 +43,12 @@ class MediaType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '3500k',
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg',
+                            'video/mp4',
+                            'image/webp',
                         ],
                         'mimeTypesMessage' => 'Chargez une image ou une vidéo',
                     ])

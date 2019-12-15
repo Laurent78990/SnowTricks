@@ -68,12 +68,12 @@ class Trick
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick")
      */
-    private $media;
+    private $medias;
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
-        $this->media = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
 
@@ -184,7 +184,6 @@ class Trick
             $this->commentaires[] = $commentaire;
             $commentaire->setTrick($this);
         }
-
         return $this;
     }
 
@@ -197,38 +196,35 @@ class Trick
                 $commentaire->setTrick(null);
             }
         }
-
         return $this;
     }
 
     /**
      * @return Collection|Media[]
      */
-    public function getMedia(): Collection
+    public function getMedias(): Collection
     {
-        return $this->media;
+        return $this->medias;
     }
 
-    public function addMedium(Media $medium): self
+    public function addMedia(Media $media): self
     {
-        if (!$this->media->contains($medium)) {
-            $this->media[] = $medium;
-            $medium->setTrick($this);
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+            $media->setTrick($this);
         }
-
         return $this;
     }
 
-    public function removeMedium(Media $medium): self
+    public function removeMedia(Media $media): self
     {
-        if ($this->media->contains($medium)) {
-            $this->media->removeElement($medium);
+        if ($this->medias->contains($media)) {
+            $this->medias->removeElement($media);
             // set the owning side to null (unless already changed)
-            if ($medium->getTrick() === $this) {
-                $medium->setTrick(null);
+            if ($media->getTrick() === $this) {
+                $media->setTrick(null);
             }
         }
-
         return $this;
     }
 

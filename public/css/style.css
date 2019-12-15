@@ -190,6 +190,11 @@ html, body {
 
 h4 {font-size: 20px;}
 
+div.card-show-trick h4.card-title {
+  font-size: 1em;
+  margin: 3px auto;;
+}
+
 .view {
 height: 80%;
 }
@@ -319,6 +324,17 @@ div.row.trick-full img {
 /* div.gallery.container {
   margin-top: 10vh;
 } */
+
+#trickGallery .card-icons {
+  right: .5vh;
+  top: 6px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+#trickGallery .card-icons:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
 
 .flex-container {
   display: flex;
