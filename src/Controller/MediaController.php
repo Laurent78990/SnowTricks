@@ -80,6 +80,7 @@ class MediaController extends AbstractController
 
         return $this->render('media/new.html.twig', [
             'media' => $media,
+            'trick' => $trick,
             'form' => $form->createView(),
         ]);
     }
@@ -91,10 +92,14 @@ class MediaController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$media->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            
+            $trick = $media->getTrick();
+            
             $entityManager->remove($media);
             $entityManager->flush();
+
         }
 
-        return $this->redirectToRoute('media_index');
+        return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
     }
 }

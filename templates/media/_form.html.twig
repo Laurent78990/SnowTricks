@@ -1,6 +1,10 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
         
+
+        {# {{  dump(trick)  }} #}
+
+
         {# OK #}
         {# <a class="btn btn-info" href="#">Retour</a> #}
         
@@ -8,9 +12,9 @@
         {# <a class="btn btn-info" href="app.request.headers.get('referer')">Retour</a> #}
         
         {# OK #}
-        <a class="btn btn-info" href="{{ path('trick_show', {'id': 2 }) }}">Retour</a>
+        {# <a class="btn btn-info" href="{{ path('trick_show', {'id': 2 }) }}">Retour</a> #}
 
-        {# <a class="btn btn-info" href="{{ path('trick_show', {'id': media.getTrick()  }) }}">Retour</a> #}
+        <a class="btn btn-info" href="{{ path('trick_show', {'id': trick.id  }) }}">Retour</a>
 
 
         <button class="btn btn-warning">{{ button_label|default('Enregistrer') }}</button>
