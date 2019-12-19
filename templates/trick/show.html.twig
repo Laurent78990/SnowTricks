@@ -113,7 +113,7 @@
  
                      <span class="about card-icons">
                 
-                        <form method="post" action="{{ path('trick_delete', {'id': media.id}) }}"
+                        <form method="post" action="{{ path('media_delete', {'id': media.id}) }}"
                             onsubmit="return confirm('Etes-vous certain de vouloir supprimer le media {{ media.mediaName }} ?');">
                         
                             <input type="hidden" name="_method" value="DELETE">

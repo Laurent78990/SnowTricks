@@ -78,14 +78,14 @@
 <div class="text-center">
 
   {% if current_page > 0 %}
-    <a class="btn btn-sm btn-info mt-3" href="{{ path('previous_page') }}">Charger 15 précédents</a>
+    <a class="btn btn-sm btn-info mt-3" href="{{ path('previous_page') }}">Page précédente</a>
   {% endif %}
 
   <a class="btn btn-green mt-3" href="{{ path('trick_new') }}">Ajouter une figure</a>
 
   {% if lastKey == 14 %}
   {# {% if tricks|length == 14 %} #}
-    <a class="btn btn-sm btn-info mt-3" href="{{ path('next_page') }}">Charger 15 suivants</a>
+    <a class="btn btn-sm btn-info mt-3" href="{{ path('next_page') }}">Page suivante</a>
   {% endif %}
 
 </div>
